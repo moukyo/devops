@@ -24,3 +24,34 @@ spec:
             cpu: 250m
           limits:
             cpu: 500m
+            
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-ms
+spec:
+  ports:
+  - port: 8091
+    protocol: TCP
+    targetPort: 8091
+  selector:
+    app: payment-ms
+  type: ClusterIP
+  
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: payment-ms
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: payment-ms.<CLUSTER_SPECIFIC_DNS_ZONE>
+    http:
+      paths:
+      - backend:
+          serviceName: payment-ms
+          servicePort: 8091
+        path: /
