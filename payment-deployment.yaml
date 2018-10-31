@@ -48,7 +48,7 @@ metadata:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:
   rules:
-  - host: payment-ms01.<CLUSTER_SPECIFIC_DNS_ZONE>
+  - host: payment-ms.b88b6fc891c546469957.eastus.aksapp.io
     http:
       paths:
       - backend:
