@@ -18,7 +18,7 @@ spec:
       - name: payment-ms
         image: eshopaksabfd.azurecr.io/payment-ms:latest
         ports:
-        - containerPort: 8091
+        - containerPort: 80
         resources:
           requests:
             cpu: 250m
@@ -34,7 +34,7 @@ spec:
   ports:
   - port: 8091
     protocol: TCP
-    targetPort: 8091
+    targetPort: 80
   selector:
     app: payment-ms
   type: ClusterIP
@@ -53,5 +53,5 @@ spec:
       paths:
       - backend:
           serviceName: payment-ms
-          servicePort: 8091
+          servicePort: 80
         path: /
